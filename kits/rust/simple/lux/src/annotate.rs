@@ -165,7 +165,7 @@ impl Annotate {
     /// # Returns
     ///
     /// Action to perform
-    pub fn text_at_default(position: Position, message: &str, font_size: i32) -> Action {
+    pub fn text_at_default(position: Position, message: &str) -> Action {
         Self::text_at(position, message, 16)
     }
 

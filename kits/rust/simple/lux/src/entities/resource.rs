@@ -12,7 +12,7 @@ pub type ResourceAmount = i32;
 /// # See also
 ///
 /// Check <https://www.lux-ai.org/specs-2021#Resources>
-#[derive(Serialize, Deserialize, Eq, PartialEq, Clone, fmt::Debug, Hash)]
+#[derive(Serialize, Deserialize, Eq, PartialEq, Clone, Copy, fmt::Debug, Hash)]
 #[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum ResourceType {
     /// Wood resource

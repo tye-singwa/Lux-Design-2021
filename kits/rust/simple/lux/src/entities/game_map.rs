@@ -113,7 +113,8 @@ impl Cell {
         }
     }
 
-    /// Returns `true` if this [`Cell`] has a non-depleted [`Resource`], `false` otherwise
+    /// Returns `true` if this [`Cell`] has a non-depleted [`Resource`], `false`
+    /// otherwise
     ///
     /// # Parameters
     ///
@@ -129,7 +130,7 @@ impl Cell {
     pub fn has_resource(&self) -> bool {
         self.resource
             .as_ref()
-            .map_or(false, |resource| resource.amount > 0.0f32)
+            .map_or(false, |resource| resource.amount > 0)
     }
 }
 
@@ -189,7 +190,26 @@ impl Index<Position> for GameMap {
     /// # Returns
     ///
     /// Reference to [`Cell`]
-    fn index(&self, position: Position) -> &Self::Output { self.get_cell_by_pos(position) }
+    fn index(&self, position: Position) -> &Self::Output {
+        &self.map[position.y as usize][position.x as usize]
+    }
+}
+
+/// Access [cells][`Cell`] by [`Position`]
+impl IndexMut<Position> for GameMap {
+    /// Returns the [`Cell`] at the given `position`
+    ///
+    /// # Parameters
+    ///
+    /// - `self` - Self reference
+    /// - `position` - [`Position`] to get [`Cell`] from
+    ///
+    /// # Returns
+    ///
+    /// Reference to [`Cell`]
+    fn index_mut(&mut self, position: Position) -> &mut Self::Output {
+        &mut self.map[position.y as usize][position.x as usize]
+    }
 }
 
 impl GameMap {
@@ -207,7 +227,7 @@ impl GameMap {
     /// # See also
     ///
     /// Check <https://www.lux-ai.org/specs-2021#The%20Map>
-    fn new(width: Coordinate, height: Coordinate) -> Self {
+    pub fn new(width: Coordinate, height: Coordinate) -> Self {
         let map = Self::empty_map(width as usize, height as usize);
         Self { height, width, map }
     }
@@ -306,7 +326,7 @@ impl GameMap {
 
         for x in 0..width {
             for y in 0..height {
-                map[y][x].position = Position::new(x as Coordinate, y as Coordinate);
+                map[y][x].pos = Position::new(x as Coordinate, y as Coordinate);
             }
         }
 

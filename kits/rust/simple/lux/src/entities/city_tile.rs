@@ -20,7 +20,7 @@ pub struct CityTile {
     /// # See also
     ///
     /// Check <https://www.lux-ai.org/specs-2021#The%20Map>
-    pub position: Position,
+    pub pos: Position,
 
     /// Amount of turns to next action
     ///
@@ -51,7 +51,7 @@ impl CityTile {
         Self {
             teamid,
             cityid,
-            position,
+            pos: position,
             cooldown,
         }
     }
@@ -86,7 +86,7 @@ impl CityTile {
     ///
     /// Check <https://www.lux-ai.org/specs-2021#CityTiles>
     pub fn research(&self) -> Action {
-        format!("{} {}", Commands::RESEARCH, self.position.to_argument())
+        format!("{} {}", Commands::RESEARCH, self.pos.to_argument())
     }
 
     /// Returns build worker action. When applied and requirements are met, a
@@ -104,10 +104,11 @@ impl CityTile {
     ///
     /// Check <https://www.lux-ai.org/specs-2021#CityTiles>
     pub fn build_worker(&self) -> Action {
-        format!("{} {}", Commands::BUILD_WORKER, self.position.to_argument())
+        format!("{} {}", Commands::BUILD_WORKER, self.pos.to_argument())
     }
 
-    /// Returns the build cart action. When applied and requirements are met, a cart will be built at the [`City`].
+    /// Returns the build cart action. When applied and requirements are met, a
+    /// cart will be built at the [`City`].
     ///
     /// # Parameters
     ///
@@ -121,6 +122,6 @@ impl CityTile {
     ///
     /// Check <https://www.lux-ai.org/specs-2021#CityTiles>
     pub fn build_cart(&self) -> Action {
-        format!("{} {}", Commands::BUILD_CART, self.position.to_argument())
+        format!("{} {}", Commands::BUILD_CART, self.pos.to_argument())
     }
 }

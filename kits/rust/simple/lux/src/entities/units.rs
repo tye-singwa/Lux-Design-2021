@@ -1,6 +1,6 @@
 use std::{convert::{Into, TryFrom},
           fmt,
-          ops::Index,
+          ops::{Index, IndexMut},
           str};
 
 use serde::{Deserialize, Serialize};
@@ -36,10 +36,31 @@ impl Index<ResourceType> for Cargo {
     ///
     /// [`ResourceAmount`]
     fn index(&self, resource_type: ResourceType) -> &Self::Output {
-        &match resource_type {
-            ResourceType::Wood => self.wood,
-            ResourceType::Coal => self.coal,
-            ResourceType::Uranium => self.uranium,
+        match resource_type {
+            ResourceType::Wood => &self.wood,
+            ResourceType::Coal => &self.coal,
+            ResourceType::Uranium => &self.uranium,
+        }
+    }
+}
+
+impl IndexMut<ResourceType> for Cargo {
+    /// Returns mutable reference to amount of resource for given
+    /// [`ResourceType`]
+    ///
+    /// # Arguments:
+    ///
+    /// - `self` - reference to Self
+    /// - `resource_type` - type of [`Resource`]
+    ///
+    /// Returns:
+    ///
+    /// mutable reference to [`ResourceAmount`]
+    fn index_mut(&mut self, resource_type: ResourceType) -> &mut Self::Output {
+        match resource_type {
+            ResourceType::Wood => &mut self.wood,
+            ResourceType::Coal => &mut self.coal,
+            ResourceType::Uranium => &mut self.uranium,
         }
     }
 }
