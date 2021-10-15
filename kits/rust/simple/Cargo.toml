@@ -8,5 +8,6 @@ version = "0.1.0"
 name = "solution"
 path = "./src/main.rs"
 
-[dependencies]
-lux-ai-api = {path = "./lux"}
+[dependencies.lux-ai]
+path = "./lux"
+package = "lux-ai-api"

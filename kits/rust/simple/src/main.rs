@@ -1,8 +1,5 @@
 use std::cell::Ref;
 
-// import lux_ai crate
-use lux_ai_api as lux_ai;
-
 /// Entry point of Bot
 fn main() -> lux_ai::LuxAiResult<()> {
     // Initialize Lux AI I/O environment
